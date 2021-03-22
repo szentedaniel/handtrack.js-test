@@ -28,8 +28,8 @@ handTrack.startVideo(video).then(function (status) {
         videoOn = true;
         setInterval(() => {
             runDetection()
-        }, 1000 / 60);
-        console.log("run");
+        }, 1000 / 20);
+        console.log("Running");
     } else {
         console.log("Please enable video")
     }
@@ -38,7 +38,7 @@ handTrack.startVideo(video).then(function (status) {
 function runDetection() {
     model.detect(video).then(predictions => {
         //model.renderPredictions(predictions, canvas, context, video);
-        //console.log(predictions);
+        console.log(predictions);
         //requestAnimationFrame(runDetection);
         if(predictions.lenght !==0){
             let hand1 = predictions[0].bbox;
