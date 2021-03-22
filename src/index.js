@@ -9,7 +9,7 @@ const socket = require('socket.io')
 const app = express();
 const server = http.createServer(app)
 
-io = socket(server);
+const io = socket(server);
 
 app.use(express.static(path.join(__dirname, '..', 'public')));
 const PORT = process.env.PORT || 8000;
@@ -23,6 +23,13 @@ io.on('connection', socket => {
     console.log('Client connected', socket.id);
     allClients.push(socket);
     
+
+
+    socket.on('hand-motion', data => {
+        io.emit('hand-motion', {x: data.x, y: data.y})
+    })
+
+
     socket.on('disconnect', () => {
         console.log('1 user disconnected');
         allClients.splice(allClients.indexOf(socket), 1);

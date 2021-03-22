@@ -38,13 +38,17 @@ handTrack.startVideo(video).then(function (status) {
 function runDetection() {
     model.detect(video).then(predictions => {
         //model.renderPredictions(predictions, canvas, context, video);
-        console.log(predictions);
+        //console.log(predictions);
         //requestAnimationFrame(runDetection);
         if(predictions.length !==0){
             let hand1 = predictions[0].bbox;
             let x = hand1[0];
             let y = hand1[1];
             console.log(`x: ${x} \n y: ${y}`);
+            socket.emit('hand-motion', {x: x, y: y})
+            socket.on('hand-motion', data => {
+                console.log(data.x, data.y);
+            })
         }
     });
 }
