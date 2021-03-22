@@ -8,7 +8,7 @@ navigator.getUserMedia_ = (navigator.getUserMedia ||
     navigator.msGetUserMedia);
 
 const modelParams = {
-    flipHorizontal: true,   // flip e.g for video 
+    flipHorizontal: false,   // flip e.g for video 
     imageScaleFactor: 0.7,  // reduce input image size for (maybe) gains in speed.
     maxNumBoxes: 20,        // maximum number of boxes to detect
     iouThreshold: 0.5,      // ioU threshold for non-max suppression
@@ -20,13 +20,12 @@ const canvas = document.querySelector('#canvas');
 const context = canvas.getContext('2d');
 let model;
 
-handTrack.load().then(newModel => {  
+handTrack.load(modelParams).then(newModel => {  
     model = newModel
-    //trackButton.disabled = false
+    
 });
 
-  
-//model.setModelParameters(modelParams)
+
 
 
 handTrack.startVideo(video).then(function (status) {
@@ -101,8 +100,4 @@ function runDetection() {
 
 // handTrack.load(modelParams).then(lmodel => {
 //     model = lmodel;
-<<<<<<< HEAD
 // })
-=======
-// })
->>>>>>> c3b753e00d3c60f31f5ebfb68b95f17a1fec3f05
