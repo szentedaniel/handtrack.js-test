@@ -8,7 +8,7 @@ navigator.getUserMedia_ = (navigator.getUserMedia ||
     navigator.msGetUserMedia);
 
 const modelParams = {
-    flipHorizontal: false,   // flip e.g for video 
+    flipHorizontal: true,   // flip e.g for video 
     imageScaleFactor: 0.7,  // reduce input image size for (maybe) gains in speed.
     maxNumBoxes: 20,        // maximum number of boxes to detect
     iouThreshold: 0.5,      // ioU threshold for non-max suppression
