@@ -41,6 +41,7 @@ handTrack.startVideo(video).then(function (status) {
 function runDetection() {
     model.detect(video).then(predictions => {
         model.rederPredictions(predictions, canvas, context, video);
+        console.log(predictions);
         requestAnimationFrame(runDetection);
     });
 }
