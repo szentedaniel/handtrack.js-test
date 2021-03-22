@@ -1,6 +1,9 @@
 const socket = io();
 
 //import * as handTrack from 'handtrackjs';
+socket.on('hand-motion', data => {
+    console.log(data.x, data.y);
+})
 
 navigator.getUserMedia_ = (navigator.getUserMedia ||
     navigator.webkitGetUserMedia ||
@@ -44,11 +47,8 @@ function runDetection() {
             let hand1 = predictions[0].bbox;
             let x = hand1[0];
             let y = hand1[1];
-            console.log(`x: ${x} \n y: ${y}`);
+            //console.log(`x: ${x} \n y: ${y}`);
             socket.emit('hand-motion', {x: x, y: y})
-            socket.on('hand-motion', data => {
-                console.log(data.x, data.y);
-            })
         }
     });
 }
