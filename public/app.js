@@ -40,7 +40,7 @@ function runDetection() {
         //model.renderPredictions(predictions, canvas, context, video);
         console.log(predictions);
         //requestAnimationFrame(runDetection);
-        if(predictions.lenght !==0){
+        if(predictions.length !==0){
             let hand1 = predictions[0].bbox;
             let x = hand1[0];
             let y = hand1[1];
