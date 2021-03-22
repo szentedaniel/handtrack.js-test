@@ -101,4 +101,8 @@ function runDetection() {
 
 // handTrack.load(modelParams).then(lmodel => {
 //     model = lmodel;
+<<<<<<< HEAD
 // })
+=======
+// })
+>>>>>>> c3b753e00d3c60f31f5ebfb68b95f17a1fec3f05
