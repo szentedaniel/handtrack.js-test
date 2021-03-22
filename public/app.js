@@ -20,18 +20,15 @@ const canvas = document.querySelector('#canvas');
 const context = canvas.getContext('2d');
 let model;
 
-handTrack.load(modelParams).then(newModel => {  
-    model = newModel
-    
-});
-
 
 
 
 handTrack.startVideo(video).then(function (status) {
     if (status) {
         videoOn = true;
-        runDetection()
+        setInterval(() => {
+            runDetection()
+        }, 1000 / 60);
         console.log("run");
     } else {
         console.log("Please enable video")
@@ -47,6 +44,9 @@ function runDetection() {
 }
 
 
+handTrack.load(modelParams).then(newModel => {  
+    model = newModel
+});
 
 
 
@@ -57,23 +57,9 @@ function runDetection() {
 
 
 
-// const modelParams = {
-//     flipHorizontal: true, // flip e.g for video 
-//     imageScaleFactor: 0.7, // reduce input image size for gains in speed.
-//     maxNumBoxes: 20, // maximum number of boxes to detect
-//     iouThreshold: 0.5, // ioU threshold for non-max suppression
-//     scoreThreshold: 0.79, // confidence threshold for predictions.
-// }
 
-// navigator.getUserMedia_ = (navigator.getUserMedia ||
-//     navigator.webkitGetUserMedia ||
-//     navigator.mozGetUserMedia ||
-//     navigator.msGetUserMedia);
 
-// const video = document.querySelector('#video');
-// const canvas = document.querySelector('#canvas');
-// const context = canvas.getContext('2d');
-// let model;
+
 
 
 // handTrack.startVideo().then(status => {
