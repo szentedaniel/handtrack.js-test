@@ -1,5 +1,12 @@
 const socket = io();
 
+
+const video = document.querySelector('#video');
+const canvas = document.querySelector('#canvas');
+const context = canvas.getContext('2d');
+let model;
+
+
 //import * as handTrack from 'handtrackjs';
 socket.on('hand-motion', data => {
     console.log(data.x, data.y);
@@ -44,10 +51,7 @@ async function loadModel() {
 //     scoreThreshold: 0.79,    // confidence threshold for predictions.
 // }
 
-const video = document.querySelector('#video');
-const canvas = document.querySelector('#canvas');
-const context = canvas.getContext('2d');
-let model;
+
 
 
 
