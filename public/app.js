@@ -57,7 +57,7 @@ const runDetection = () => {
             let hand1 = predictions[0].bbox;
             handX = hand1[0];
             handY = hand1[1];
-            console.log(handX, handY);
+            //console.log(handX, handY);
             moveMouse(handX, handY)
 
             // socket.emit('hand-motion', {
@@ -70,9 +70,11 @@ const runDetection = () => {
 }
 
 document.addEventListener("handevent", (e) => {
+    console.log("event elkapva");
+    console.log(e);
     kes.style.top = e.clientX / video.height * window.innerHeight + 'px'
     kes.style.left = e.clientY / video.width * window.innerWidth + 'px'
-    console.log(e);
+    console.log(e.clientX, e.clientY);
 })
 
 
@@ -98,10 +100,14 @@ document.addEventListener("handevent", (e) => {
 // })
 
 const moveMouse = (x, y) => {
-    document.dispatchEvent(new CustomEvent("handevent", { //MouseEvent-mousemove
+    const event = new CustomEvent("handevent", { //MouseEvent-mousemove
+        bubbles: true,
+        cancelable: true,
         clientX: x,
         clientY: y
-    }));
+    });
+    console.log("event elküldve");
+    document.dispatchEvent(event)
 }
 
 
