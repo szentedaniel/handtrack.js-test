@@ -32,7 +32,7 @@ handTrack.startVideo(video).then((status) => {
         setInterval(() => {
             runDetection()
         }, 1000 / 30);
-        console.log(status);
+        //console.log(status);
     } else {
         console.log("Please enable video")
     }
@@ -88,7 +88,7 @@ document.addEventListener("handevent", (e) => {
     
     kes.style.top = sumX/5 + 'px'
     kes.style.left = sumY/5 + 'px'
-    console.log(e.detail.clientX, e.detail.clientY);
+    //console.log(e.detail.clientX, e.detail.clientY);
 })
 
 
@@ -121,7 +121,6 @@ const moveMouse = (x, y) => {
             clientX: x,
             clientY: y
         }
-
     });
     document.dispatchEvent(event)
 }
