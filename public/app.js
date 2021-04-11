@@ -15,7 +15,7 @@ navigator.getUserMedia_ = (navigator.getUserMedia ||
 
 const modelParams = {
     flipHorizontal: true, // flip e.g for video 
-    facingMode: "user",
+    
     //imageScaleFactor: 0.7, // reduce input image size for (maybe) gains in speed.
     maxNumBoxes: 1, // maximum number of boxes to detect
     iouThreshold: 0.5, // ioU threshold for non-max suppression
@@ -49,7 +49,8 @@ const runDetection = () => {
             let hand1 = predictions[0].bbox;
             let x = hand1[0];
             let y = hand1[1];
-            //console.log(`x: ${x} \n y: ${y}`);
+            
+            
             socket.emit('hand-motion', {
                 id: socket.id,
                 x: x,
@@ -74,8 +75,8 @@ socket.on('hand-motion', data => {
         knife_ = div
         document.body.appendChild(div)
     }
-    knife_.style.top = data.y/video.offsetHeight * window.innerHeight + 'px'
-    knife_.style.left = data.x/video.offsetWidth * window.innerWidth + 'px'
+    knife_.style.top = data.y/video.height * window.innerHeight + 'px'
+    knife_.style.left = data.x/video.width * window.innerWidth + 'px'
 })
 
 
