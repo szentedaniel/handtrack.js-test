@@ -103,8 +103,11 @@ const moveMouse = (x, y) => {
     const event = new CustomEvent("handevent", { //MouseEvent-mousemove
         bubbles: true,
         cancelable: true,
-        clientX: x,
-        clientY: y
+        detail: {
+            clientX: x,
+            clientY: y
+        }
+
     });
     console.log("event elküldve");
     document.dispatchEvent(event)
