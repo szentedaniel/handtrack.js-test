@@ -70,8 +70,8 @@ const runDetection = () => {
 }
 
 document.addEventListener("handevent", (e) => {
-    kes.style.top = e.detail.clientX / video.height * window.innerHeight + 'px'
-    kes.style.left = e.detail.clientY / video.width * window.innerWidth + 'px'
+    kes.style.top = e.detail.clientY / video.height * window.innerHeight + 'px'
+    kes.style.left = e.detail.clientX / video.width * window.innerWidth + 'px'
     console.log(e.detail.clientX, e.detail.clientY);
 })
 
