@@ -15,7 +15,7 @@ navigator.getUserMedia_ = (navigator.getUserMedia ||
 
 const modelParams = {
     flipHorizontal: true, // flip e.g for video 
-    
+
     //imageScaleFactor: 0.7, // reduce input image size for (maybe) gains in speed.
     maxNumBoxes: 1, // maximum number of boxes to detect
     iouThreshold: 0.5, // ioU threshold for non-max suppression
@@ -43,7 +43,7 @@ const knife = {}
 let handX = 0;
 let handY = 0;
 const kes = document.createElement('div')
-kes.style.position= 'relative'
+kes.style.position = 'relative'
 kes.textContent = '🔪'
 kes.style.fontSize = '5em'
 document.body.appendChild(kes)
@@ -70,8 +70,9 @@ const runDetection = () => {
 }
 
 document.addEventListener("handevent", (e) => {
-    kes.style.top = e.clientX/video.height * window.innerHeight + 'px'
-    kes.style.left = e.clientY/video.width * window.innerWidth + 'px'
+    kes.style.top = e.clientX / video.height * window.innerHeight + 'px'
+    kes.style.left = e.clientY / video.width * window.innerWidth + 'px'
+    console.log(e);
 })
 
 
@@ -89,19 +90,19 @@ document.addEventListener("handevent", (e) => {
 //     }
 //     const x = data.y/video.height * window.innerHeight
 //     const y = data.x/video.width * window.innerWidth
-    
+
 
 //     //knife_.style.top = x + 'px'
 //     //knife_.style.left = y + 'px'
-    
+
 // })
 
 const moveMouse = (x, y) => {
-    document.dispatchEvent(new CustomEvent("handevent", {  //MouseEvent-mousemove
-      clientX:  x,
-      clientY:  y
+    document.dispatchEvent(new CustomEvent("handevent", { //MouseEvent-mousemove
+        clientX: x,
+        clientY: y
     }));
-  }
+}
 
 
 
