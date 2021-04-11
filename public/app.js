@@ -33,6 +33,8 @@ handTrack.startVideo(video).then((status) => {
     }
 });
 
+const knife = {}
+
 const runDetection = () => {
     model.detect(video).then(predictions => {
         model.renderPredictions(predictions, canvas, context, video);
@@ -59,8 +61,18 @@ handTrack.load(modelParams).then(newModel => {
 
 socket.on('hand-motion', data => {
     console.log(data.id, '\n', data.x, data.y);
+    let knife_ = knife[data.id]
+    if(!knife_){
+        const span = document.createElement('span')
+        span.style.position= 'relative'
+        span.textContent = '🔪'
+        knife[data.id] = span
+        knife_ = span
+        document.body.appendChild(span)
+    }
+    knife_.style.top = data.y/video.offsetHeight * window.innerHeight + 'px'
+    knife_.style.left = data.x/video.offsetWidth * window.innerWidth + 'px'
 })
-
 
 
 
