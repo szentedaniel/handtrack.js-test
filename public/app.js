@@ -40,6 +40,14 @@ handTrack.startVideo(video).then((status) => {
 
 const knife = {}
 
+let handX = 0;
+let handY = 0;
+const kes = document.createElement('div')
+kes.style.position= 'relative'
+kes.textContent = '🔪'
+kes.style.fontSize = '5em'
+document.body.appendChild(kes)
+
 const runDetection = () => {
     model.detect(video).then(predictions => {
         //model.renderPredictions(predictions, canvas, context, video);
@@ -47,71 +55,58 @@ const runDetection = () => {
         //requestAnimationFrame(runDetection);
         if (predictions.length !== 0) {
             let hand1 = predictions[0].bbox;
-            let x = hand1[0];
-            let y = hand1[1];
-            
-            
-            socket.emit('hand-motion', {
-                id: socket.id,
-                x: x,
-                y: y
-            })
+            handX = hand1[0];
+            handY = hand1[1];
+            console.log(handX, handY);
+            moveMouse(handX, handY)
+
+            // socket.emit('hand-motion', {
+            //     id: socket.id,
+            //     x: x,
+            //     y: y
+            // })
         }
     });
 }
 
-
-
-
-socket.on('hand-motion', data => {
-    console.log(data.id, '\n', data.x, data.y);
-    let knife_ = knife[data.id]
-    if(!knife_){
-        const div = document.createElement('div')
-        div.style.position= 'relative'
-        div.textContent = '🔪'
-        div.style.fontSize = '5em'
-        knife[data.id] = div
-        knife_ = div
-        document.body.appendChild(div)
-    }
-    knife_.style.top = data.y/video.height * window.innerHeight + 'px'
-    knife_.style.left = data.x/video.width * window.innerWidth + 'px'
+document.addEventListener("handevent", (e) => {
+    kes.style.top = e.clientX/video.height * window.innerHeight + 'px'
+    kes.style.left = e.clientY/video.width * window.innerWidth + 'px'
 })
 
 
-
-
-
-
-
-
-
-
-
-// handTrack.startVideo().then(status => {
-//     if (status) {
-//         navigator.getUserMedia({
-//                 video: {}
-//             }, stream => { //width: { min: 1024, ideal: 1280, max: 1920}, height: { min: 776, ideal: 720, max: 1080}
-//                 video.srcObject = stream;
-//                 //Run decetion
-//                 setInterval(() => {
-//                     runDetection()
-//                 }, 1000 / 60);
-//             },
-//             err => console.log(err)
-//         );
+// socket.on('hand-motion', data => {
+//     console.log(data.id, '\n', data.x, data.y);
+//     let knife_ = knife[data.id]
+//     if(!knife_){
+//         const div = document.createElement('div')
+//         div.style.position= 'relative'
+//         div.textContent = '🔪'
+//         div.style.fontSize = '5em'
+//         knife[data.id] = div
+//         knife_ = div
+//         document.body.appendChild(div)
 //     }
+//     const x = data.y/video.height * window.innerHeight
+//     const y = data.x/video.width * window.innerWidth
+    
+
+//     //knife_.style.top = x + 'px'
+//     //knife_.style.left = y + 'px'
+    
 // })
 
-// function runDetection() {
-//     model.detect(video).then(predictions => {
-//         console.log(predictions);
-//     })
-//     requestAnimationFrame(runDetection)
-// }
+const moveMouse = (x, y) => {
+    document.dispatchEvent(new CustomEvent("handevent", {  //MouseEvent-mousemove
+      clientX:  x,
+      clientY:  y
+    }));
+  }
 
-// handTrack.load(modelParams).then(lmodel => {
-//     model = lmodel;
-// })
+
+
+
+
+// const noiseX = (noise.simplex2(0, a*0.0005) + 1) / 2;
+//   // We get another noise value for the y axis but because we don't want the same value than x, we need to use another value for the first parameter
+// const noiseY = (noise.simplex2(1, a*0.0005) + 1) / 2;
