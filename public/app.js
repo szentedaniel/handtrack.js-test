@@ -69,6 +69,7 @@ socket.on('hand-motion', data => {
         const div = document.createElement('div')
         div.style.position= 'relative'
         div.textContent = '🔪'
+        div.style.fontSize = '5em'
         knife[data.id] = div
         knife_ = div
         document.body.appendChild(div)
