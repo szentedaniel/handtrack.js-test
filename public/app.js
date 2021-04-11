@@ -1,93 +1,65 @@
 const socket = io();
 
-
 const video = document.querySelector('#video');
 const canvas = document.querySelector('#canvas');
 const context = canvas.getContext('2d');
 let model;
 
 
-//import * as handTrack from 'handtrackjs';
-socket.on('hand-motion', data => {
-    console.log(data.x, data.y);
-})
+
 
 navigator.getUserMedia_ = (navigator.getUserMedia ||
     navigator.webkitGetUserMedia ||
     navigator.mozGetUserMedia ||
     navigator.msGetUserMedia);
 
-
-async function loadModel() {
-    $(".loading").removeClass('d-none');
-    var flipWebcam = (webcam.facingMode =='user') ? true: false
-    return new Promise((resolve, reject) => {
-        const modelParams = {
-            flipHorizontal: flipWebcam, 
-            maxNumBoxes: 20, 
-            iouThreshold: 0.5,
-            scoreThreshold: 0.8
-        }
-    
-        handTrack.load(modelParams).then(mdl => { 
-            model = mdl;
-            $(".loading").addClass('d-none');
-            resolve();
-        }).catch(err => {
-            reject(error);
-        });
-    });
+const modelParams = {
+    flipHorizontal: false, // flip e.g for video 
+    imageScaleFactor: 0.7, // reduce input image size for (maybe) gains in speed.
+    maxNumBoxes: 20, // maximum number of boxes to detect
+    iouThreshold: 0.5, // ioU threshold for non-max suppression
+    scoreThreshold: 0.79, // confidence threshold for predictions.
 }
 
-// handTrack.load(modelParams).then(newModel => {  
-//     model = newModel
-// });
-
-// const modelParams = {
-//     flipHorizontal: true,   // flip e.g for video 
-//     imageScaleFactor: 0.7,  // reduce input image size for (maybe) gains in speed.
-//     maxNumBoxes: 20,        // maximum number of boxes to detect
-//     iouThreshold: 0.5,      // ioU threshold for non-max suppression
-//     scoreThreshold: 0.79,    // confidence threshold for predictions.
-// }
-
-
-
-
-
-
-handTrack.startVideo(video).then(function (status) {
+handTrack.startVideo(video).then((status) => {
     if (status) {
         videoOn = true;
         setInterval(() => {
             runDetection()
-        }, 1000 / 20);
+        }, 1000 / 60);
         console.log("Running");
     } else {
         console.log("Please enable video")
     }
 });
 
-function runDetection() {
+const runDetection = () => {
     model.detect(video).then(predictions => {
         //model.renderPredictions(predictions, canvas, context, video);
         //console.log(predictions);
         //requestAnimationFrame(runDetection);
-        if(predictions.length !==0){
+        if (predictions.length !== 0) {
             let hand1 = predictions[0].bbox;
             let x = hand1[0];
             let y = hand1[1];
             //console.log(`x: ${x} \n y: ${y}`);
-            socket.emit('hand-motion', {id: socket.id, x: x, y: y})
+            socket.emit('hand-motion', {
+                id: socket.id,
+                x: x,
+                y: y
+            })
         }
     });
 }
 
 
+handTrack.load(modelParams).then(newModel => {
+    model = newModel
+});
 
-
-
-
+socket.on('hand-motion', data => {
+    console.log(data.id, '\n', data.x, data.y);
+})
 
 
 
