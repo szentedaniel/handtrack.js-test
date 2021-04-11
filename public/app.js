@@ -23,7 +23,7 @@ const modelParams = {
 
 handTrack.startVideo(video).then((status) => {
     if (status) {
-        videoOn = true;
+        videoOn = false;
         setInterval(() => {
             runDetection()
         }, 1000 / 60);
@@ -37,7 +37,7 @@ const knife = {}
 
 const runDetection = () => {
     model.detect(video).then(predictions => {
-        model.renderPredictions(predictions, canvas, context, video);
+        //model.renderPredictions(predictions, canvas, context, video);
         //console.log(predictions);
         //requestAnimationFrame(runDetection);
         if (predictions.length !== 0) {
@@ -63,12 +63,12 @@ socket.on('hand-motion', data => {
     console.log(data.id, '\n', data.x, data.y);
     let knife_ = knife[data.id]
     if(!knife_){
-        const span = document.createElement('span')
-        span.style.position= 'relative'
-        span.textContent = '🔪'
-        knife[data.id] = span
-        knife_ = span
-        document.body.appendChild(span)
+        const div = document.createElement('div')
+        div.style.position= 'relative'
+        div.textContent = '🔪'
+        knife[data.id] = div
+        knife_ = div
+        document.body.appendChild(div)
     }
     knife_.style.top = data.y/video.offsetHeight * window.innerHeight + 'px'
     knife_.style.left = data.x/video.offsetWidth * window.innerWidth + 'px'
