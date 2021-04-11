@@ -15,10 +15,10 @@ navigator.getUserMedia_ = (navigator.getUserMedia ||
 
 const modelParams = {
     flipHorizontal: false, // flip e.g for video 
-    imageScaleFactor: 0.7, // reduce input image size for (maybe) gains in speed.
-    maxNumBoxes: 20, // maximum number of boxes to detect
+    //imageScaleFactor: 0.7, // reduce input image size for (maybe) gains in speed.
+    maxNumBoxes: 1, // maximum number of boxes to detect
     iouThreshold: 0.5, // ioU threshold for non-max suppression
-    scoreThreshold: 0.79, // confidence threshold for predictions.
+    scoreThreshold: 0.8, // confidence threshold for predictions.
 }
 
 handTrack.startVideo(video).then((status) => {
