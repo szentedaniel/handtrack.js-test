@@ -31,7 +31,7 @@ handTrack.startVideo(video).then((status) => {
         videoOn = false;
         setInterval(() => {
             runDetection()
-        }, 1000 / 60);
+        }, 1000 / 30);
         console.log(status);
     } else {
         console.log("Please enable video")
@@ -68,10 +68,26 @@ const runDetection = () => {
         }
     });
 }
+let coords = [{}]
 
 document.addEventListener("handevent", (e) => {
-    kes.style.top = e.detail.clientY / video.height * window.innerHeight + 'px'
-    kes.style.left = e.detail.clientX / video.width * window.innerWidth + 'px'
+    const x = e.detail.clientY / video.height * window.innerHeight
+    const y = e.detail.clientX / video.width * window.innerWidth
+    if (coords.length <=5) {
+        coords.push({x: x, y: y})
+    }else {
+        coords.shift()
+        coords.push({x: x, y: y})
+    }
+    let sumX = 0
+    let sumY = 0
+    coords.forEach(cord => {
+        sumX += cord.x
+        sumY += cord.y
+    });
+    
+    kes.style.top = sumX/5 + 'px'
+    kes.style.left = sumY/5 + 'px'
     console.log(e.detail.clientX, e.detail.clientY);
 })
 
