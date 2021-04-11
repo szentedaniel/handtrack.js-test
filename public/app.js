@@ -14,7 +14,7 @@ navigator.getUserMedia_ = (navigator.getUserMedia ||
     navigator.msGetUserMedia);
 
 const modelParams = {
-    flipHorizontal: false, // flip e.g for video 
+    flipHorizontal: true, // flip e.g for video 
     facingMode: "user",
     //imageScaleFactor: 0.7, // reduce input image size for (maybe) gains in speed.
     maxNumBoxes: 1, // maximum number of boxes to detect
@@ -32,7 +32,7 @@ handTrack.startVideo(video).then((status) => {
         setInterval(() => {
             runDetection()
         }, 1000 / 60);
-        console.log("Running");
+        console.log(status);
     } else {
         console.log("Please enable video")
     }
