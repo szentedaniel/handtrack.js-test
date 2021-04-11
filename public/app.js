@@ -70,11 +70,9 @@ const runDetection = () => {
 }
 
 document.addEventListener("handevent", (e) => {
-    console.log("event elkapva");
-    console.log(e);
-    kes.style.top = e.clientX / video.height * window.innerHeight + 'px'
-    kes.style.left = e.clientY / video.width * window.innerWidth + 'px'
-    console.log(e.clientX, e.clientY);
+    kes.style.top = e.detail.clientX / video.height * window.innerHeight + 'px'
+    kes.style.left = e.detail.clientY / video.width * window.innerWidth + 'px'
+    console.log(e.detail.clientX, e.detail.clientY);
 })
 
 
@@ -109,7 +107,6 @@ const moveMouse = (x, y) => {
         }
 
     });
-    console.log("event elküldve");
     document.dispatchEvent(event)
 }
 
