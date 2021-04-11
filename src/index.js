@@ -22,17 +22,21 @@ let allClients = [];
 io.on('connection', socket => {
     console.log('Client connected', socket.id);
     allClients.push(socket);
-    
+
 
 
     socket.on('hand-motion', data => {
-        io.emit('hand-motion', {x: data.x, y: data.y})
+        io.emit('hand-motion', {
+            id: data.id,
+            x: data.x,
+            y: data.y
+        })
     })
 
 
     socket.on('disconnect', () => {
         console.log('1 user disconnected');
         allClients.splice(allClients.indexOf(socket), 1);
-        
+
     })
 })
