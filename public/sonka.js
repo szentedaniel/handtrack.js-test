@@ -59,8 +59,8 @@ setInterval(() => {
 function createSonka(){
     let forras=hozzavalok[Math.floor(Math.random()*hozzavalok.length)] //random hozzávaló
     // console.log(forras);
-    console.log(sonka);
     let sonka=PIXI.Sprite.from(forras);
+    console.log(sonka);
     sonka.name=forras;
     sonka.anchor.set(0.5,0.5);
     sonka.scale.set(0.3,0.3);
