@@ -113,6 +113,7 @@ function onButtonDown(e)
     else{
         //x=e.detail.clienX;
         //y=e.detail.clientY;
+        console.log(x,y);
         x = e.detail.clientY / video.height * app.renderer.height
         y = e.detail.clientX / video.width * app.renderer.width
         if (coords.length <=5) {
