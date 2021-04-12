@@ -14,6 +14,10 @@ let g=0.1;
 let eger=false;
 let coords = [{}]
 
+const pointer = PIXI.Sprite.from('./images/egesz/paradicsom.png');
+pointer.x =
+pointer.y = 
+
 //összes hozzávaló képei
 hozzavalok.push("images/egesz/csirke.png",
 "images/egesz/hagyma.png",
@@ -54,7 +58,8 @@ setInterval(() => {
 //létrehozza a feldobandó alapanyagot
 function createSonka(){
     let forras=hozzavalok[Math.floor(Math.random()*hozzavalok.length)] //random hozzávaló
-    console.log(forras);
+    // console.log(forras);
+    console.log(sonka);
     let sonka=PIXI.Sprite.from(forras);
     sonka.name=forras;
     sonka.anchor.set(0.5,0.5);
@@ -118,9 +123,10 @@ function onButtonDown(e)
     else{
         //x=e.detail.clienX;
         //y=e.detail.clientY;
+        
+        x = handX / video.height * app.renderer.height
+        y = handY / video.width * app.renderer.width
         console.log(x,y);
-        x = e.detail.clientY / video.height * app.renderer.height
-        y = e.detail.clientX / video.width * app.renderer.width
         if (coords.length <=5) {
             coords.push({x: x, y: y})
         }else {
