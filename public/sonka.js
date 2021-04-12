@@ -46,7 +46,9 @@ const handEvent = (x, y) => {
     document.dispatchEvent(event)
 }
 
-app.ticker.add(handEvent(handX,handY))
+setInterval(() => {
+    handEvent(handX,handY)
+}, 1000/30);
 
 //létrehozza a feldobandó alapanyagot
 function createSonka(){

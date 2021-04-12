@@ -42,11 +42,11 @@ const knife = {}
 
 let handX = 0;
 let handY = 0;
-const kes = document.createElement('div')
-kes.style.position = 'relative'
-kes.textContent = '🔪'
-kes.style.fontSize = '5em'
-document.body.appendChild(kes)
+// const kes = document.createElement('div')
+// kes.style.position = 'relative'
+// kes.textContent = '🔪'
+// kes.style.fontSize = '5em'
+// document.body.appendChild(kes)
 
 const runDetection = () => {
     model.detect(video).then(predictions => {
@@ -86,8 +86,8 @@ document.addEventListener("handevent", (e) => {
         sumY += cord.y
     });
     
-    kes.style.top = sumX/5 + 'px'
-    kes.style.left = sumY/5 + 'px'
+    // kes.style.top = sumX/5 + 'px'
+    // kes.style.left = sumY/5 + 'px'
     //console.log(e.detail.clientX, e.detail.clientY);
 })
 
