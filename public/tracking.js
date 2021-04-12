@@ -6,8 +6,6 @@ const context = canvas.getContext('2d');
 let model;
 
 
-
-
 navigator.getUserMedia_ = (navigator.getUserMedia ||
     navigator.webkitGetUserMedia ||
     navigator.mozGetUserMedia ||
@@ -71,26 +69,26 @@ const runDetection = () => {
 }
 let coords = [{}]
 
-document.addEventListener("handevent", (e) => {
-    const x = e.detail.clientY / video.height * window.innerHeight
-    const y = e.detail.clientX / video.width * window.innerWidth
-    if (coords.length <=5) {
-        coords.push({x: x, y: y})
-    }else {
-        coords.shift()
-        coords.push({x: x, y: y})
-    }
-    let sumX = 0
-    let sumY = 0
-    coords.forEach(cord => {
-        sumX += cord.x
-        sumY += cord.y
-    });
+// document.addEventListener("handevent", (e) => {
+//     const x = e.detail.clientY / video.height * window.innerHeight
+//     const y = e.detail.clientX / video.width * window.innerWidth
+//     if (coords.length <=5) {
+//         coords.push({x: x, y: y})
+//     }else {
+//         coords.shift()
+//         coords.push({x: x, y: y})
+//     }
+//     let sumX = 0
+//     let sumY = 0
+//     coords.forEach(cord => {
+//         sumX += cord.x
+//         sumY += cord.y
+//     });
     
-    // kes.style.top = sumX/5 + 'px'
-    // kes.style.left = sumY/5 + 'px'
-    //console.log(e.detail.clientX, e.detail.clientY);
-})
+//     // kes.style.top = sumX/5 + 'px'
+//     // kes.style.left = sumY/5 + 'px'
+//     //console.log(e.detail.clientX, e.detail.clientY);
+// })
 
 
 // socket.on('hand-motion', data => {
@@ -114,17 +112,17 @@ document.addEventListener("handevent", (e) => {
 
 // })
 
-const moveMouse = (x, y) => {
-    const event = new CustomEvent("handevent", { //MouseEvent-mousemove
-        bubbles: true,
-        cancelable: true,
-        detail: {
-            clientX: x,
-            clientY: y
-        }
-    });
-    document.dispatchEvent(event)
-}
+// const moveMouse = (x, y) => {
+//     const event = new CustomEvent("handevent", { //MouseEvent-mousemove
+//         bubbles: true,
+//         cancelable: true,
+//         detail: {
+//             clientX: x,
+//             clientY: y
+//         }
+//     });
+//     document.dispatchEvent(event)
+// }
 
 
 export {handX, handY}

@@ -143,7 +143,7 @@ function onButtonDown(e) {
 
         x = handX / video.height * app.renderer.height
         y = handY / video.width * app.renderer.width
-        //console.log('x,y: ', x, y);
+        console.log('x,y: ', x, y);
         if (coords.length <= 5) {
             coords.push({
                 x: x,
