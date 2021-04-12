@@ -30,7 +30,7 @@ hozzavalok.push("images/egesz/csirke.png",
 "images/egesz/uborka.png");
 
 
-function sonkaEso(){
+async function sonkaEso(){
     let sonka=createSonka();
     sonkak.push(sonka);
     t.push(0);
@@ -56,7 +56,7 @@ setInterval(() => {
 }, 1000/30);
 
 //létrehozza a feldobandó alapanyagot
-function createSonka(){
+async function createSonka(){
     let forras=hozzavalok[Math.floor(Math.random()*hozzavalok.length)] //random hozzávaló
     // console.log(forras);
     let sonka=PIXI.Sprite.from(forras);
@@ -126,7 +126,7 @@ function onButtonDown(e)
         
         x = handX / video.height * app.renderer.height
         y = handY / video.width * app.renderer.width
-        console.log(x,y);
+        console.log('x,y: ', x,y);
         if (coords.length <=5) {
             coords.push({x: x, y: y})
         }else {
