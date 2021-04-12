@@ -57,8 +57,9 @@ const runDetection = () => {
             let hand1 = predictions[0].bbox;
             handX = hand1[0];
             handY = hand1[1];
-            console.log(handX, handY);
-            moveMouse(handX, handY)
+            console.log('tracking: ', handX, handY);
+            
+            //moveMouse(handX, handY)
 
             // socket.emit('hand-motion', {
             //     id: socket.id,

@@ -47,12 +47,14 @@ const handEvent = (x, y) => {
 }
 
 setInterval(() => {
+    console.log('sonkaban koord: ', handX, handY);
     handEvent(handX,handY)
 }, 1000/30);
 
 //létrehozza a feldobandó alapanyagot
 function createSonka(){
     let forras=hozzavalok[Math.floor(Math.random()*hozzavalok.length)] //random hozzávaló
+    console.log(forras);
     let sonka=PIXI.Sprite.from(forras);
     sonka.name=forras;
     sonka.anchor.set(0.5,0.5);
@@ -106,6 +108,7 @@ function updateSonkak(){
 
 function onButtonDown(e)
 {
+    console.log(e);
     let x;
     let y;
     if(eger){
