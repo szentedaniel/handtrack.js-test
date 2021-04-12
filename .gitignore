@@ -7,6 +7,10 @@
 /socket*
 /server*
 /server*/*
+/handtrack0_0_13
+/handtrack0_1_2_not_working
+/ehh
+
 
 /.pnp
 .pnp.js
