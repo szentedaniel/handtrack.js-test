@@ -28,7 +28,7 @@ handTrack.load(modelParams).then(newModel => {
 
 handTrack.startVideo(video).then((status) => {
     if (status) {
-        videoOn = false;
+        //videoOn = false;
         setInterval(() => {
             runDetection()
         }, 1000 / 30);
@@ -57,7 +57,7 @@ const runDetection = () => {
             let hand1 = predictions[0].bbox;
             handX = hand1[0];
             handY = hand1[1];
-            //console.log(handX, handY);
+            console.log(handX, handY);
             moveMouse(handX, handY)
 
             // socket.emit('hand-motion', {
